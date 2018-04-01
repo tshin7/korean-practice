@@ -3,6 +3,8 @@ const path = require('path');
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
 
+const env = process.env.NODE_ENV || 'dev';
+
 const PORT = process.env.PORT || 5000;
 
 // Multi-process to utilize all CPU cores.
@@ -31,9 +33,12 @@ if (cluster.isMaster) {
   });
 
   // All remaining requests return the React app, so it can handle routing.
-  // app.get('*', function(request, response) {
-  //   response.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
-  // });
+  // Check if in production
+  if (env === 'production') {
+    app.get('*', function(request, response) {
+      response.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+    });
+  }
 
   app.listen(PORT, function () {
     console.error(`Node cluster worker ${process.pid}: listening on port ${PORT}`);

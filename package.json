@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/tshin7/korean-practice#readme",
   "dependencies": {
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "nodemon": "^1.17.3"
   }
 }
