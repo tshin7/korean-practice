@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Layout, Menu, Icon } from 'antd';
+import { Input, Layout, Menu, Icon } from 'antd';
 import './App.css';
+import MainContent from './components/MainContent';
 const { Header, Sider, Content } = Layout;
-
-
+const { TextArea } = Input;
 
 class App extends Component {
   state = {
@@ -47,8 +47,8 @@ class App extends Component {
               onClick={this.toggle}
             />
           </Header>
-          <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
-            Content
+          <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: '40em' }}>
+            <MainContent />
           </Content>
         </Layout>
       </Layout>
