@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Input, Layout, Menu, Icon } from 'antd';
 import './App.css';
 import MainContent from './components/MainContent';
+import FaKeyboard from 'react-icons/lib/fa/keyboard-o';
 const { Header, Sider, Content } = Layout;
-const { TextArea } = Input;
 
 class App extends Component {
   state = {
@@ -27,15 +27,15 @@ class App extends Component {
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
             <Menu.Item key="1">
               <Icon type="user" />
-              <span>nav 1</span>
+              <span>Profile</span>
             </Menu.Item>
             <Menu.Item key="2">
-              <Icon type="video-camera" />
-              <span>nav 2</span>
+              <Icon><FaKeyboard /></Icon>
+              <span>Typing Practice</span>
             </Menu.Item>
             <Menu.Item key="3">
-              <Icon type="upload" />
-              <span>nav 3</span>
+              <Icon type="setting" />
+              <span>Settings</span>
             </Menu.Item>
           </Menu>
         </Sider>
