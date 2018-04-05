@@ -6,6 +6,7 @@ import FaKeyboard from 'react-icons/lib/fa/keyboard-o';
 const { Header, Sider, Content } = Layout;
 
 class App extends Component {
+  
   state = {
     collapsed: false,
   };
@@ -15,6 +16,7 @@ class App extends Component {
       collapsed: !this.state.collapsed,
     });
   }
+
   render() {
     return (
       <Layout>
