@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Input, Layout, Menu, Icon } from 'antd';
+import { Layout, Menu, Icon } from 'antd';
 import './App.css';
 import MainContent from './components/MainContent';
 import FaKeyboard from 'react-icons/lib/fa/keyboard-o';
 const { Header, Sider, Content } = Layout;
 
 class App extends Component {
-  
+
   state = {
     collapsed: false,
   };
