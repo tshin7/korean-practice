@@ -15,8 +15,7 @@ class MainContent extends Component {
 
     this.state = {
       textAreaValue: '',
-      textStyled: [],
-      backgroundColorList: backgroundColorList
+      symbolIndex: 0,
     };
   }
 
@@ -25,15 +24,28 @@ class MainContent extends Component {
 
   };
 
-  onTestButtonClick = () => {
-    let highlightList = this.state.backgroundColorList;
-    highlightList[1] = highlightColor;
-    this.setState({
-      backgroundColorList: highlightList
-    });
-  };
+  // onTestButtonClick = () => {
+  //   let highlightList = this.state.backgroundColorList;
+  //   highlightList[1] = highlightColor;
+  //   this.setState({
+  //     backgroundColorList: highlightList
+  //   });
+  // };
 
   handleTextAreaChange = (event) => {
+    console.log(event.target.value);
+    console.log(event.target.value.slice(-1));
+    const symbolIndex = this.state.symbolIndex;
+    const typedSymbol = event.target.value.slice(-1);
+    const currentlyHighlightedSymbol = text[symbolIndex];
+    // if typed symbol matches currently highlighted symbol, move highlight ot next symbol or space
+    if (typedSymbol === currentlyHighlightedSymbol) {
+      this.setState({
+        symbolIndex: symbolIndex + 1
+      });
+    }
+
+    // update entire content of text area
     this.setState({
       textAreaValue: event.target.value
     });
@@ -42,14 +54,22 @@ class MainContent extends Component {
   render() {
     // const textStyled = this.state.textStyled;
     let textStyled = text.split('').map((e, i) => {
-      return (
-        <span id={ 'syllableBlock_' + i } key={ i } style={{ backgroundColor: this.state.backgroundColorList[i] }}>{ e }</span>
-      );
+      const symbolIndex = this.state.symbolIndex;
+      if (i === symbolIndex) {
+        return (
+          <span id={ 'syllableBlock_' + i } key={ i } style={{ backgroundColor: highlightColor }}>{ e }</span>
+        );
+      }
+      else {
+        return (
+          <span id={ 'syllableBlock_' + i } key={ i } style={{ backgroundColor: noHighlightColor }}>{ e }</span>
+        );
+      }
+
     });
 
     return (
       <div>
-        <Button type="primary" onClick={ this.onTestButtonClick }>Test Button</Button>
         <div style={{ fontSize: '2em' }}>{ textStyled }</div>
         <TextArea
           rows={8}
@@ -57,7 +77,7 @@ class MainContent extends Component {
           onChange={this.handleTextAreaChange}
           style={{ fontSize: '2em' }}
         />
-
+        <Button type="primary" onClick={ this.onTestButtonClick }>Test Button</Button>
       </div>
     );
   };
