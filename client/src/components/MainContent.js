@@ -17,7 +17,8 @@ class MainContent extends Component {
       timerStarted: false,
       textAreaValue: '',
       symbolIndex: 0,
-      timeLeft: 60
+      timeLeft: 60,
+      wordsTyped: 0
     };
 
     this.timer = 0;
@@ -62,9 +63,17 @@ class MainContent extends Component {
     const currentlyHighlightedSymbol = text[symbolIndex];
     // if typed symbol matches currently highlighted symbol, move highlight ot next symbol or space
     if (typedSymbol === currentlyHighlightedSymbol) {
-      this.setState({
-        symbolIndex: symbolIndex + 1
-      });
+      if (typedSymbol === ' ') {
+        const wordsTyped = this.state.wordsTyped;
+        this.setState({
+          symbolIndex: symbolIndex + 1,
+          wordsTyped: wordsTyped + 1
+        });
+      } else {
+        this.setState({
+          symbolIndex: symbolIndex + 1
+        });
+      }
     }
 
     // update entire content of text area
@@ -74,7 +83,8 @@ class MainContent extends Component {
   }
 
   render() {
-    const timeLeft= this.state.timeLeft;
+    const timeLeft = this.state.timeLeft;
+    const wordsTyped = this.state.wordsTyped;
 
     let textStyled = text.split('').map((e, i) => {
       const symbolIndex = this.state.symbolIndex;
@@ -94,9 +104,8 @@ class MainContent extends Component {
     return (
       <div>
         <button onClick={this.startTimer}>Start</button>
-        <Card style={{ width: 100, textAlign: 'center', fontSize: '2em' }}>
-          <p>{ timeLeft }</p>
-        </Card>
+        <div style={{ fontSize: '1.5em' }}>Time Left: { timeLeft }</div>
+        <div style={{ fontSize: '1.5em' }}>Words Typed: { wordsTyped }</div>
         <div style={{ fontSize: '2em' }}>{ textStyled }</div>
         <TextArea
           rows={8}
