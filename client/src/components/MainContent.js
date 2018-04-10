@@ -14,6 +14,7 @@ class MainContent extends Component {
     // const backgroundColorList = [highlightColor, ...Array(text.length - 1).fill(noHighlightColor)];
 
     this.state = {
+      timerStarted: false,
       textAreaValue: '',
       symbolIndex: 0,
       timeLeft: 60
@@ -26,14 +27,6 @@ class MainContent extends Component {
   componentDidMount() {
 
   };
-
-  // onTestButtonClick = () => {
-  //   let highlightList = this.state.backgroundColorList;
-  //   highlightList[1] = highlightColor;
-  //   this.setState({
-  //     backgroundColorList: highlightList
-  //   });
-  // };
 
   startTimer = () => {
     if (this.timer === 0) {
@@ -55,8 +48,15 @@ class MainContent extends Component {
   }
 
   handleTextAreaChange = (event) => {
-    console.log(event.target.value);
-    console.log(event.target.value.slice(-1));
+    // console.log(event.target.value);
+    // console.log(event.target.value.slice(-1));
+    const timerStarted = this.state.timerStarted;
+    if (!timerStarted) {
+      this.startTimer();
+      this.setState({
+        timerStarted: true
+      });
+    }
     const symbolIndex = this.state.symbolIndex;
     const typedSymbol = event.target.value.slice(-1);
     const currentlyHighlightedSymbol = text[symbolIndex];
@@ -104,7 +104,6 @@ class MainContent extends Component {
           onChange={this.handleTextAreaChange}
           style={{ fontSize: '2em' }}
         />
-        <Button type="primary" onClick={ this.onTestButtonClick }>Test Button</Button>
       </div>
     );
   };
