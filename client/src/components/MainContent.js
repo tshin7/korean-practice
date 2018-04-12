@@ -51,34 +51,37 @@ class MainContent extends Component {
   handleTextAreaChange = (event) => {
     // console.log(event.target.value);
     // console.log(event.target.value.slice(-1));
-    const timerStarted = this.state.timerStarted;
+    let timerStarted = this.state.timerStarted;
     if (!timerStarted) {
       this.startTimer();
-      this.setState({
-        timerStarted: true
-      });
+      timerStarted = true;
     }
-    const symbolIndex = this.state.symbolIndex;
-    const typedSymbol = event.target.value.slice(-1);
+    const currentInput = event.target.value;
+    let symbolIndex = this.state.symbolIndex;
+    let wordsTyped = this.state.wordsTyped;
+    const typedSymbol = currentInput.slice(-1);
     const currentlyHighlightedSymbol = text[symbolIndex];
     // if typed symbol matches currently highlighted symbol, move highlight ot next symbol or space
     if (typedSymbol === currentlyHighlightedSymbol) {
       if (typedSymbol === ' ') {
-        const wordsTyped = this.state.wordsTyped;
-        this.setState({
-          symbolIndex: symbolIndex + 1,
-          wordsTyped: wordsTyped + 1
-        });
+        symbolIndex++;
+        wordsTyped++;
       } else {
-        this.setState({
-          symbolIndex: symbolIndex + 1
-        });
+        symbolIndex++
       }
     }
+    console.log(currentInput);
+    if (currentInput.length < this.state.textAreaValue.length) {
+      // move highlighted symbol back one
+      symbolIndex--;
+    }
 
-    // update entire content of text area
+    // update states
     this.setState({
-      textAreaValue: event.target.value
+      timerStarted: timerStarted,
+      textAreaValue: currentInput,
+      symbolIndex: symbolIndex,
+      wordsTyped: wordsTyped
     });
   }
 
@@ -103,7 +106,7 @@ class MainContent extends Component {
 
     return (
       <div>
-        <button onClick={this.startTimer}>Start</button>
+        <Button onClick={this.startTimer}>Start</Button>
         <div style={{ fontSize: '1.5em' }}>Time Left: { timeLeft }</div>
         <div style={{ fontSize: '1.5em' }}>Words Typed: { wordsTyped }</div>
         <div style={{ fontSize: '2em' }}>{ textStyled }</div>
@@ -111,7 +114,7 @@ class MainContent extends Component {
           rows={8}
           value={this.state.textAreaValue}
           onChange={this.handleTextAreaChange}
-          style={{ fontSize: '2em' }}
+          style={{ fontSize: '2em', userSelect: 'none' }}
         />
       </div>
     );
