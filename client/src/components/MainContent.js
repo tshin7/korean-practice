@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
 import { Button, Card, Input } from 'antd';
+import React, { Component } from 'react';
 const { TextArea } = Input;
 
 const highlightColor = '#FFFF00'; // yellow
@@ -73,10 +73,10 @@ class MainContent extends Component {
       }
     }
     console.log(currentInput);
-    // if (currentInput.length < this.state.textAreaValue.length) {
-    //   // move highlighted symbol back one
-    //   symbolIndex--;
-    // }
+    if (currentInput.length < this.state.textAreaValue.length) {
+      // move highlighted symbol back one
+      symbolIndex--;
+    }
 
     // update states
     this.setState({
@@ -116,6 +116,8 @@ class MainContent extends Component {
         <Button onClick={this.startTimer}>Start</Button>
         <div style={{ fontSize: '1.5em' }}>Time Left: { timeLeft }</div>
         <div style={{ fontSize: '1.5em' }}>Words Typed: { wordsTyped }</div>
+        <div style={{ fontSize: '1.5em' }}>Speed: { wordsTyped } WPM</div>
+        <div style={{ fontSize: '1.5em' }}>Accuracy: { wordsTyped }%</div>
         <div style={{ fontSize: '2em' }}>{ textStyled }</div>
         <TextArea
           rows={8}
