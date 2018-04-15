@@ -63,19 +63,18 @@ class MainContent extends Component {
     let wordsTyped = this.state.wordsTyped;
     const typedSymbol = currentInput.slice(-1);
     const currentlyHighlightedSymbol = text[symbolIndex];
-    // if typed symbol matches currently highlighted symbol, move highlight ot next symbol or space
+    // if typed symbol matches currently highlighted symbol, increment wordsTyped
     if (typedSymbol === currentlyHighlightedSymbol) {
-      if (typedSymbol === ' ') {
-        symbolIndex++;
-        wordsTyped++;
-      } else {
-        symbolIndex++
-      }
+      wordsTyped++;
     }
     console.log(currentInput);
-    if (currentInput.length < this.state.textAreaValue.length) {
+    console.log(this.state.textAreaValue);
+    const lastInput = this.state.textAreaValue;
+    if (currentInput.length < lastInput.length) {
       // move highlighted symbol back one
       symbolIndex--;
+    } else if (currentInput.length > lastInput.length) {
+      symbolIndex++;
     }
 
     // update states
