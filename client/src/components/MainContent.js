@@ -16,11 +16,15 @@ class MainContent extends Component {
     // const backgroundColorList = [highlightColor, ...Array(text.length - 1).fill(noHighlightColor)];
 
     this.state = {
+      numKeystrokes: 0,
+
       timerStarted: false,
       textAreaValue: '',
       symbolIndex: 0,
       timeLeft: 60,
-      wordsTyped: 0
+      wordsTyped: 0,
+      speed: 0,
+      accuracy: 0
     };
 
     this.timer = 0;
@@ -51,7 +55,9 @@ class MainContent extends Component {
   }
 
   handleTextAreaChange = (event) => {
-    // console.log(event.target.value);
+
+
+    // console.log(event.targe  t.value);
     // console.log(event.target.value.slice(-1));
     let timerStarted = this.state.timerStarted;
     if (!timerStarted) {
@@ -61,21 +67,27 @@ class MainContent extends Component {
     const currentInput = event.target.value;
     let symbolIndex = this.state.symbolIndex;
     let wordsTyped = this.state.wordsTyped;
-    const typedSymbol = currentInput.slice(-1);
-    const currentlyHighlightedSymbol = text[symbolIndex];
+    const currentlyTypedSymbol = currentInput.slice(-1);
+    const correctMatchingSymbol = text[symbolIndex];
     // if typed symbol matches currently highlighted symbol, increment wordsTyped
-    if (typedSymbol === currentlyHighlightedSymbol) {
+    if (currentlyTypedSymbol === correctMatchingSymbol) {
       wordsTyped++;
     }
-    console.log(currentInput);
+    console.log('###');
+    console.log('current input: ' + currentInput);
     console.log(this.state.textAreaValue);
     const lastInput = this.state.textAreaValue;
+    // this is when the user presses backspace and deletes one symbol
     if (currentInput.length < lastInput.length) {
       // move highlighted symbol back one
       symbolIndex--;
+      if (currentlyTypedSymbol !== ' ') {
+        wordsTyped--;
+      }
     } else if (currentInput.length > lastInput.length) {
       symbolIndex++;
     }
+
 
     // update states
     this.setState({
@@ -86,9 +98,19 @@ class MainContent extends Component {
     });
   }
 
+  keyPress = (e) => {
+    const numKeystrokes = this.state.numKeystrokes + 1;
+    this.setState({
+      numKeystrokes: numKeystrokes
+    });
+   }
+
   render() {
+    const numKeystrokes = this.state.numKeystrokes;
     const timeLeft = this.state.timeLeft;
     const wordsTyped = this.state.wordsTyped;
+    const speed = this.state.speed;
+    const accuracy = this.state.accuracy;
 
     let textStyled = text.split('').map((e, i) => {
       const symbolIndex = this.state.symbolIndex;
@@ -114,14 +136,16 @@ class MainContent extends Component {
       <div>
         <Button onClick={this.startTimer}>Start</Button>
         <div style={{ fontSize: '1.5em' }}>Time Left: { timeLeft }</div>
+        <div style={{ fontSize: '1.5em' }}>Key Strokes: { numKeystrokes }</div>
         <div style={{ fontSize: '1.5em' }}>Words Typed: { wordsTyped }</div>
-        <div style={{ fontSize: '1.5em' }}>Speed: { wordsTyped } WPM</div>
-        <div style={{ fontSize: '1.5em' }}>Accuracy: { wordsTyped }%</div>
+        <div style={{ fontSize: '1.5em' }}>Speed: { speed } WPM</div>
+        <div style={{ fontSize: '1.5em' }}>Accuracy: { accuracy }%</div>
         <div style={{ fontSize: '2em' }}>{ textStyled }</div>
         <TextArea
           rows={8}
           value={this.state.textAreaValue}
           onChange={this.handleTextAreaChange}
+          onKeyUp={this.keyPress}
           style={{ fontSize: '2em', userSelect: 'none' }}
         />
       </div>
