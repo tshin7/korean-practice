@@ -135,7 +135,7 @@ class MainContent extends Component {
 
     let textStyled = text.split('').map((e, i) => {
       // highlight the symbol that the user is on
-      if (i === textAreaValueLength) {
+      if (i === textAreaValueLength - 1) {
         return (
           <span id={ 'syllableBlock_' + i } key={ i } style={{ backgroundColor: yellowColor }}>{ e }</span>
         );
