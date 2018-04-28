@@ -115,7 +115,7 @@ class MainContent extends Component {
     if (textAreaValueLength === 0) return;
     console.log('keypress: ' + e.key);
     const keypress = e.key;
-    let reg = RegExp('^[A-Za-z]$');
+    let reg = RegExp('^\\S$');
     // if (!reg.test(keypress)) return;
     let numKeystrokes = this.state.numKeystrokes;
     console.log(textAreaValueLength);
