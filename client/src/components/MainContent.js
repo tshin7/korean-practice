@@ -24,7 +24,6 @@ class MainContent extends Component {
 
       symbolIndex: 0,
       timeLeft: 60,
-      wordsTyped: 0,
       speed: 0,
       accuracy: 0
     };
@@ -71,13 +70,10 @@ class MainContent extends Component {
 
     const entireTextAreaInput = event.target.value;
     let symbolIndex = this.state.symbolIndex;
-    let wordsTyped = this.state.wordsTyped;
     // currentlyTypedSymbol is the symbol the user is current typing
     const currentlyTypedSymbol = entireTextAreaInput.slice(-1);
     const correctMatchingSymbol = text[symbolIndex];
-    // if typed symbol matches currently highlighted symbol, increment wordsTyped
     if (currentlyTypedSymbol === correctMatchingSymbol) {
-      wordsTyped++;
       symbolIndex++;
     }
     const lastInput = this.state.textAreaValue;
@@ -88,9 +84,6 @@ class MainContent extends Component {
     if (entireTextAreaInput.length < lastInput.length) {
       // move highlighted symbol back one
       symbolIndex--;
-      if (currentlyTypedSymbol !== ' ') {
-        wordsTyped--;
-      }
     }
     // else if (entireTextAreaInput.length > lastInput.length) {
     //   symbolIndex++;
@@ -102,7 +95,6 @@ class MainContent extends Component {
       timerStarted: timerStarted,
       textAreaValue: entireTextAreaInput,
       symbolIndex: symbolIndex,
-      wordsTyped: wordsTyped
     });
   }
 
@@ -133,7 +125,7 @@ class MainContent extends Component {
   render() {
     const numKeystrokes = this.state.numKeystrokes;
     const timeLeft = this.state.timeLeft;
-    const wordsTyped = this.state.wordsTyped;
+    const wordsTyped = numKeystrokes / 5;
     const speed = this.state.speed;
     const accuracy = this.state.accuracy;
 
