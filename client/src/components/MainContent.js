@@ -57,6 +57,16 @@ class MainContent extends Component {
     }
   }
 
+  resetButton = () => {
+    clearInterval(this.timer);
+    this.setState({
+      timeLeft: 0,
+      numKeystrokes: 0,
+      speed: 0,
+      accuracy: 0
+    });
+  }
+
   // handler for text area
   handleTextAreaChange = (event) => {
 
@@ -165,6 +175,7 @@ class MainContent extends Component {
     return (
       <div>
         <Button onClick={this.startTimer}>Start</Button>
+        <Button onClick={this.resetButton}>Reset</Button>
         <div style={{ fontSize: '1.5em' }}>Time Left: { timeLeft }</div>
         <div style={{ fontSize: '1.5em' }}>Key Strokes: { numKeystrokes }</div>
         <div style={{ fontSize: '1.5em' }}>Words Typed: { wordsTyped }</div>
