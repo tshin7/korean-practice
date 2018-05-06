@@ -20,12 +20,9 @@ class MainContent extends Component {
       numKeystrokes: 0,
       timerStarted: false,
       textAreaValue: '',
-
-
       symbolIndex: 0,
       timeLeft: 60,
       speed: 0,
-      accuracy: 0
     };
 
     this.timer = 0;
@@ -69,9 +66,10 @@ class MainContent extends Component {
 
   // handler for text area
   handleTextAreaChange = (event) => {
-
     // console.log(event.targe  t.value);
     // console.log(event.target.value.slice(-1));
+
+    // start timer if it hasn't started yet when user types in text area
     let timerStarted = this.state.timerStarted;
     if (!timerStarted) {
       this.startTimer();
@@ -83,21 +81,11 @@ class MainContent extends Component {
     // currentlyTypedSymbol is the symbol the user is current typing
     const currentlyTypedSymbol = entireTextAreaInput.slice(-1);
     const correctMatchingSymbol = text[symbolIndex];
+
+    // if user types in correct symbol, advance symbolIndex by 1 to move highlight to next symbol
     if (currentlyTypedSymbol === correctMatchingSymbol) {
       symbolIndex++;
     }
-    const lastInput = this.state.textAreaValue;
-    console.log('###');
-    console.log('current input: ' + entireTextAreaInput);
-    console.log('last input: ' + lastInput);
-    // this is when the user presses backspace and deletes one symbol
-    if (entireTextAreaInput.length < lastInput.length) {
-      // move highlighted symbol back one
-      symbolIndex--;
-    }
-    // else if (entireTextAreaInput.length > lastInput.length) {
-    //   symbolIndex++;
-    // }
 
 
     // update states
@@ -133,40 +121,32 @@ class MainContent extends Component {
    }
 
   render() {
+    const symbolIndex= this.state.symbolIndex;
     const numKeystrokes = this.state.numKeystrokes;
     const timeLeft = this.state.timeLeft;
     const wordsTyped = numKeystrokes / 5;
     const speed = this.state.speed;
-    const accuracy = this.state.accuracy;
 
     const textAreaValue = this.state.textAreaValue;
     const textAreaValueLength = textAreaValue.length;
 
     let textStyled = text.split('').map((e, i) => {
       // highlight the symbol that the user is on
-      if (i === textAreaValueLength) {
+      if (i === symbolIndex) {
         return (
           <span id={ 'syllableBlock_' + i } key={ i } style={{ backgroundColor: yellowColor }}>{ e }</span>
         );
       }
-      else if (i >= textAreaValueLength) {
+      else if (i > symbolIndex) {
         // color background white for chars ahead of user
         return (
           <span id={ 'syllableBlock_' + i } key={ i } style={{ backgroundColor: whiteColor }}>{ e }</span>
         );
       }
-      const correctCharMatch = textAreaValue[i];
-      // console.log("~~~");
-      // console.log('e: ' + e);
-      // console.log('correctCharMatch': correctCharMatch);
-      if (e === correctCharMatch) {
+      else {
+        // color background gray if less than symbolIndex
         return (
           <span id={ 'syllableBlock_' + i } key={ i } style={{ backgroundColor: grayColor }}>{ e }</span>
-        );
-      }
-      else {
-        return (
-          <span id={ 'syllableBlock_' + i } key={ i } style={{ backgroundColor: redColor }}>{ e }</span>
         );
       }
 
@@ -180,7 +160,6 @@ class MainContent extends Component {
         <div style={{ fontSize: '1.5em' }}>Key Strokes: { numKeystrokes }</div>
         <div style={{ fontSize: '1.5em' }}>Words Typed: { wordsTyped }</div>
         <div style={{ fontSize: '1.5em' }}>Speed: { speed } WPM</div>
-        <div style={{ fontSize: '1.5em' }}>Accuracy: { accuracy }%</div>
         <div style={{ fontSize: '2em' }}>{ textStyled }</div>
         <TextArea
           rows={8}
