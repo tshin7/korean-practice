@@ -8,6 +8,7 @@ const grayColor = '#E8E8E8';
 const redColor = '#ff0000';
 
 const text = '절에 가서 도 닦는 것만 도가 아니야. 사람과 부대끼면서 도를 닦으라 그래 나는. 왜냐면 그래야 좋은 거 나쁜 거 보면서 깨달음을 얻거든. 나쁜 사람을 만나고 ‘저 사람은 원래 나쁜사람이구나’ 인정하면 내 마음이 편해져. 그런데 ‘에이 저놈 보기도 싫어’ 이러면 내 속이 나빠져. 병 걸린다고. 나쁜 사람에 대한 미움을 왜 내 마음에 두고 살아. 왜 내가 내 속을 썩여. 좋은 것만 자꾸 받아들여야 해. 좋은 것이 쌓이면 금이 되어버려. 그리고 마음이 금이 되면 꽃이 펴. 그 꽃은 건 지지 않는 꽃이야. 내가 마음에 심어두면 항상 펴 있어. 사람이 왜 좋은 줄 알아? 수시로 꽃이 필 수 있잖아.';
+const timeGiven = 60;
 
 class MainContent extends Component {
   constructor(props) {
@@ -21,8 +22,7 @@ class MainContent extends Component {
       timerStarted: false,
       textAreaValue: '',
       symbolIndex: 0,
-      timeLeft: 60,
-      speed: 0,
+      timeLeft: timeGiven,
     };
 
     this.timer = 0;
@@ -59,7 +59,6 @@ class MainContent extends Component {
     this.setState({
       timeLeft: 0,
       numKeystrokes: 0,
-      speed: 0,
       accuracy: 0
     });
   }
@@ -125,7 +124,6 @@ class MainContent extends Component {
     const numKeystrokes = this.state.numKeystrokes;
     const timeLeft = this.state.timeLeft;
     const wordsTyped = numKeystrokes / 5;
-    const speed = this.state.speed;
 
     const textAreaValue = this.state.textAreaValue;
     const textAreaValueLength = textAreaValue.length;
@@ -151,6 +149,10 @@ class MainContent extends Component {
       }
 
     });
+
+    // calculate typing speed
+    const timePassed = timeGiven - timeLeft;
+    const speed = (wordsTyped / timePassed * 60) | 0;
 
     return (
       <div>
