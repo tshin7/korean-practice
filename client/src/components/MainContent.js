@@ -86,7 +86,6 @@ class MainContent extends Component {
       symbolIndex++;
     }
 
-
     // update states
     this.setState({
       timerStarted: timerStarted,
@@ -98,30 +97,37 @@ class MainContent extends Component {
   // handler for key press in text area
   // used to keep track of number of key strokes
   keyPress = (e) => {
-    const textAreaValue = this.state.textAreaValue;
-    const textAreaValueLength = textAreaValue.length;
-    // prevent numKeystrokes from incrementing if user presses backspace when there is nothing to delete
-    if (textAreaValueLength === 0) return;
-    console.log('keypress: ' + e.key);
-    const keypress = e.key;
-    let reg = RegExp('^\\S$');
-    // if (!reg.test(keypress)) return;
-    let numKeystrokes = this.state.numKeystrokes;
-    console.log(textAreaValueLength);
-    if (keypress === 'Backspace') {
-      // if keypress is backspace then decrement numKeystrokes by 1
-      numKeystrokes = this.state.numKeystrokes - 1;
-    } else if (reg.test(keypress)) {
-      numKeystrokes = this.state.numKeystrokes + 1;
-    }
-    this.setState({
-      numKeystrokes: numKeystrokes
-    });
+    // console.log(e.currentTarget.value);
+    // console.log(e.currentTarget.value.length);
+
+    // const textAreaValue = this.state.textAreaValue;
+    // const textAreaValueLength = textAreaValue.length;
+    // // prevent numKeystrokes from incrementing if user presses backspace when there is nothing to delete
+    // if (textAreaValueLength === 0) return;
+    // // console.log('keypress: ' + e.key);
+    // const keypress = e.key;
+    // let reg = RegExp('^\\S$');
+    // // if (!reg.test(keypress)) return;
+    // let numKeystrokes = this.state.numKeystrokes;
+    // // console.log(textAreaValueLength);
+    // if (keypress === 'Backspace') {
+    //   // if keypress is backspace then decrement numKeystrokes by 1
+    //   numKeystrokes = this.state.numKeystrokes - 1;
+    // } else if (reg.test(keypress)) {
+    //   numKeystrokes = this.state.numKeystrokes + 1;
+    // }
+    // this.setState({
+    //   numKeystrokes: numKeystrokes
+    // });
    }
 
   render() {
     const symbolIndex= this.state.symbolIndex;
-    const numKeystrokes = this.state.numKeystrokes;
+
+    // Get string slice of correctly typed text
+    const correctlyTypedTextSlice = text.slice(0, symbolIndex);
+    // use String normalize to split hangul into individual gamo chars (ㄱ, ㄴ, ㄷ, ㅎ, etc...)
+    const numKeystrokes = correctlyTypedTextSlice.normalize("NFD").length;
     const timeLeft = this.state.timeLeft;
     const wordsTyped = numKeystrokes / 5;
 
@@ -166,8 +172,8 @@ class MainContent extends Component {
         <TextArea
           rows={8}
           value={this.state.textAreaValue}
-          onChange={this.handleTextAreaChange}
           onKeyUp={this.keyPress}
+          onChange={this.handleTextAreaChange}
           style={{ fontSize: '2em', userSelect: 'none' }}
         />
       </div>
