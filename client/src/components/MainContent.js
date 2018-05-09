@@ -28,9 +28,21 @@ class MainContent extends Component {
     this.timer = 0;
   }
 
+  handleDocKeyUp = (event) => {
+    console.log(event.keyCode);
+  }
+
 
   componentDidMount() {
 
+  };
+
+  componentWillMount(){
+    document.addEventListener("keyup", this.handleDocKeyUp);
+  };
+
+  componentWillUnmount() {
+    document.removeEventListener("keyup", this.handleDocKeyUp);
   };
 
   // start timer by using setInterval
@@ -93,33 +105,6 @@ class MainContent extends Component {
       symbolIndex: symbolIndex,
     });
   }
-
-  // handler for key press in text area
-  // used to keep track of number of key strokes
-  keyPress = (e) => {
-    // console.log(e.currentTarget.value);
-    // console.log(e.currentTarget.value.length);
-
-    // const textAreaValue = this.state.textAreaValue;
-    // const textAreaValueLength = textAreaValue.length;
-    // // prevent numKeystrokes from incrementing if user presses backspace when there is nothing to delete
-    // if (textAreaValueLength === 0) return;
-    // // console.log('keypress: ' + e.key);
-    // const keypress = e.key;
-    // let reg = RegExp('^\\S$');
-    // // if (!reg.test(keypress)) return;
-    // let numKeystrokes = this.state.numKeystrokes;
-    // // console.log(textAreaValueLength);
-    // if (keypress === 'Backspace') {
-    //   // if keypress is backspace then decrement numKeystrokes by 1
-    //   numKeystrokes = this.state.numKeystrokes - 1;
-    // } else if (reg.test(keypress)) {
-    //   numKeystrokes = this.state.numKeystrokes + 1;
-    // }
-    // this.setState({
-    //   numKeystrokes: numKeystrokes
-    // });
-   }
 
   render() {
     const symbolIndex= this.state.symbolIndex;
