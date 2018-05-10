@@ -28,8 +28,15 @@ class MainContent extends Component {
     this.timer = 0;
   }
 
+  focus = () => {
+    this.textInput.focus();
+  }
+
+  // key up in any part of page
   handleDocKeyUp = (event) => {
     console.log(event.keyCode);
+    // set focus in textarea
+    this.focus();
   }
 
 
@@ -159,6 +166,7 @@ class MainContent extends Component {
           value={this.state.textAreaValue}
           onKeyUp={this.keyPress}
           onChange={this.handleTextAreaChange}
+          ref={input => this.textInput = input }
           style={{ fontSize: '2em', userSelect: 'none' }}
         />
       </div>
