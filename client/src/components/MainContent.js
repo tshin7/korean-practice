@@ -34,7 +34,8 @@ class MainContent extends Component {
 
   // key up in any part of page
   handleDocKeyUp = (event) => {
-    console.log(event.keyCode);
+    // console.log(event.keyCode);
+    console.log(event);
     // set focus in textarea
     this.focus();
   }
@@ -61,6 +62,8 @@ class MainContent extends Component {
 
   // update timer every second
   countDown = () => {
+    // Set focus on textarea
+    this.focus();
     // Remove one second, set state so a re-render happens.
     let timeLeft = this.state.timeLeft - 1;
     this.setState({
@@ -84,7 +87,7 @@ class MainContent extends Component {
 
   // handler for text area
   handleTextAreaChange = (event) => {
-    // console.log(event.targe  t.value);
+    console.log(event.target.value);
     // console.log(event.target.value.slice(-1));
 
     // start timer if it hasn't started yet when user types in text area
@@ -163,6 +166,7 @@ class MainContent extends Component {
         <div style={{ fontSize: '2em' }}>{ textStyled }</div>
         <TextArea
           rows={8}
+          hiddden='hidden'
           value={this.state.textAreaValue}
           onKeyUp={this.keyPress}
           onChange={this.handleTextAreaChange}
