@@ -14,9 +14,6 @@ class MainContent extends Component {
   constructor(props) {
     super(props);
 
-    // create list of syllable block background colors. first one is yellow and rest are white
-    // const backgroundColorList = [yellowColor, ...Array(text.length - 1).fill(whiteColor)];
-
     this.state = {
       numKeystrokes: 0,
       timerStarted: false,
@@ -34,16 +31,9 @@ class MainContent extends Component {
 
   // key up in any part of page
   handleDocKeyUp = (event) => {
-    // console.log(event.keyCode);
-    console.log(event);
     // set focus in textarea
     this.focus();
   }
-
-
-  componentDidMount() {
-
-  };
 
   componentWillMount(){
     document.addEventListener("keyup", this.handleDocKeyUp);
@@ -87,9 +77,6 @@ class MainContent extends Component {
 
   // handler for text area
   handleTextAreaChange = (event) => {
-    console.log(event.target.value);
-    // console.log(event.target.value.slice(-1));
-
     // start timer if it hasn't started yet when user types in text area
     let timerStarted = this.state.timerStarted;
     if (!timerStarted) {
@@ -117,8 +104,8 @@ class MainContent extends Component {
   }
 
   render() {
-    const symbolIndex= this.state.symbolIndex;
-
+    // index of symbol that user is currently up to
+    const symbolIndex = this.state.symbolIndex;
     // Get string slice of correctly typed text
     const correctlyTypedTextSlice = text.slice(0, symbolIndex);
     // use String normalize to split hangul into individual gamo chars (ㄱ, ㄴ, ㄷ, ㅎ, etc...)
