@@ -158,7 +158,7 @@ class MainContent extends Component {
           onKeyUp={this.keyPress}
           onChange={this.handleTextAreaChange}
           ref={input => this.textInput = input }
-          style={{ fontSize: '2em', userSelect: 'none' }}
+          style={{ fontSize: '2em', userSelect: 'none', position: 'absolute', left: '-999em' }}
         />
       </div>
     );
