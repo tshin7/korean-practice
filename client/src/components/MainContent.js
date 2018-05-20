@@ -76,11 +76,18 @@ class MainContent extends Component {
   resetButton = () => {
     // clear session timer
     clearInterval(this.timer);
-    // set session states to 0
+
+    // set session timer to 0
+    this.timer = 0;
+
+    // reset all states
     this.setState({
-      timeLeft: 0,
       numKeystrokes: 0,
-      accuracy: 0
+      timerStarted: false,
+      textAreaValue: '',
+      symbolIndex: 0,
+      timeLeft: timeGiven,
+      modalVisible: false
     });
   }
 
