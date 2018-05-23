@@ -21,7 +21,8 @@ class MainContent extends Component {
       textAreaValue: '',
       symbolIndex: 0,
       timeLeft: timeGiven,
-      modalVisible: false
+      modalVisible: false,
+      resetButtonDisabled: true
     };
 
     // timer for typing session
@@ -87,7 +88,8 @@ class MainContent extends Component {
       textAreaValue: '',
       symbolIndex: 0,
       timeLeft: timeGiven,
-      modalVisible: false
+      modalVisible: false,
+      resetButtonDisabled: true
     });
   }
 
@@ -118,6 +120,7 @@ class MainContent extends Component {
       timerStarted: timerStarted,
       textAreaValue: entireTextAreaInput,
       symbolIndex: symbolIndex,
+      resetButtonDisabled: false
     });
   }
 
@@ -186,7 +189,7 @@ class MainContent extends Component {
     return (
       <div>
         <div style={{ fontSize: '2em' }}>Start typing to begin</div>
-        <Button onClick={this.resetButton}>Reset</Button>
+        <Button disabled={this.state.resetButtonDisabled} onClick={this.resetButton}>Reset</Button>
         <div style={{ fontSize: '1.5em' }}>Time Left: { timeLeft }</div>
         <div style={{ fontSize: '1.5em' }}>Key Strokes: { numKeystrokes }</div>
         <div style={{ fontSize: '1.5em' }}>Words Typed: { wordsTyped }</div>
