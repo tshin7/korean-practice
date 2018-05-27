@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { Layout, Menu, Icon } from 'antd';
+
 import './App.css';
+
 import MainContent from './components/MainContent';
-import FaKeyboard from 'react-icons/lib/fa/keyboard-o';
-const { Header, Sider, Content } = Layout;
+import Head from './components/Head';
+
+const { Header, Content } = Layout;
 
 class App extends Component {
 
@@ -20,31 +23,7 @@ class App extends Component {
   render() {
     return (
       <Layout>
-        <Sider
-          trigger={null}
-          collapsible
-          collapsed={this.state.collapsed}
-        >
-          <div className="logo" />
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-            <Menu.Item key="1">
-              <Icon type="login" />
-              <span>Login</span>
-            </Menu.Item>
-            <Menu.Item key="2">
-              <Icon type="user" />
-              <span>Profile</span>
-            </Menu.Item>
-            <Menu.Item key="3">
-              <Icon><FaKeyboard /></Icon>
-              <span>Typing Practice</span>
-            </Menu.Item>
-            <Menu.Item key="4">
-              <Icon type="setting" />
-              <span>Settings</span>
-            </Menu.Item>
-          </Menu>
-        </Sider>
+        <Head />
         <Layout>
           <Header style={{ background: '#fff', padding: 0 }}>
             <Icon
