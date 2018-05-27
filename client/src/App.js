@@ -23,7 +23,7 @@ class App extends Component {
   render() {
     return (
       <Layout>
-        <Head />
+        <Head collapsed={ this.state.collapsed } />
         <Layout>
           <Header style={{ background: '#fff', padding: 0 }}>
             <Icon
