@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Layout, Menu, Icon } from 'antd';
 import FaKeyboard from 'react-icons/lib/fa/keyboard-o';
 
-const { Header, Sider, Content } = Layout;
+const { Sider } = Layout;
 
 class Head extends Component {
 

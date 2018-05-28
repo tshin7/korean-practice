@@ -157,9 +157,6 @@ class MainContent extends Component {
     const timeLeft = this.state.timeLeft;
     const wordsTyped = numKeystrokes / 5;
 
-    const textAreaValue = this.state.textAreaValue;
-    const textAreaValueLength = textAreaValue.length;
-
     let textStyled = text.split('').map((e, i) => {
       // highlight the symbol that the user is on
       if (i === symbolIndex) {
