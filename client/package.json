@@ -1,9 +1,11 @@
 {
   "name": "client",
   "version": "0.1.0",
+  "homepage": "https://tshin7.github.io/korean-typing-practice",
   "private": true,
   "dependencies": {
     "antd": "^3.3.1",
+    "gh-pages": "^1.2.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-icons": "^2.2.7",
@@ -18,6 +20,8 @@
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-scripts eject"
   },
