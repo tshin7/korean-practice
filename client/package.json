@@ -4,12 +4,13 @@
   "homepage": "https://tshin7.github.io/korean-typing-practice",
   "private": true,
   "dependencies": {
-    "antd": "^3.3.1",
     "gh-pages": "^1.2.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-icons": "^2.2.7",
-    "react-router-dom": "^4.2.2"
+    "react-router-dom": "^4.2.2",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^0.83.0"
   },
   "devDependencies": {
     "babel-plugin-import": "^1.6.7",
