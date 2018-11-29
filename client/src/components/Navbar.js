@@ -55,7 +55,6 @@ export default class NavBar extends Component {
             as={Link}
             to="/profile"
             onClick={this.navbarButtonClicked}
-            position="right"
             value="profile-section"
             style={{ fontFamily: `${fonts.main}, sans-serif` }}
           >
