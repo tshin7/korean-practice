@@ -1,6 +1,7 @@
-import { Button, Input, Modal } from 'antd';
+// import { Button, Input, Modal } from 'antd';
 import React, { Component } from 'react';
-const { TextArea } = Input;
+import { Button, Input, Modal, TextArea } from 'semantic-ui-react';
+// const { TextArea } = Input;
 
 const yellowColor = '#FFFF00'; // yellow
 const whiteColor = '#FFFFFF'; // white
@@ -203,6 +204,7 @@ class MainContent extends Component {
           style={{ fontSize: '2em', userSelect: 'none', position: 'absolute', left: '-999em' }}
         />
         { /* <Button type="primary" onClick={ this.showModal }>Open</Button> */ }
+        { /*
         <Modal
           title="Typing Summary"
           visible={this.state.modalVisible}
@@ -213,6 +215,7 @@ class MainContent extends Component {
           <div style={{ fontSize: '1.5em' }}>Words Typed: { wordsTyped }</div>
           <div style={{ fontSize: '1.5em' }}>Speed: { speed } WPM</div>
         </Modal>
+        */ }
       </div>
     );
   };
